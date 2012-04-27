@@ -1,0 +1,36 @@
+create table usuario (
+IdParceiro int,
+Login varchar,
+Senha varchar,
+deletado boolean,
+primary key (IdParceiro),
+foreign key (IdParceiro) references Parceiro_Comercial (IdParceiro) on
+delete cascade on update cascade
+);
+
+insert into usuario values (1,'admin','admin',false);
+
+create table Perfil (
+IdParceiro int,
+NomeJanela varchar,
+Visualizar boolean,
+Alterar boolean,
+Inserir boolean,
+Deletar boolean,
+primary key (IdParceiro,NomeJanela),
+foreign key (IdParceiro) references Parceiro_Comercial (IdParceiro) on
+delete cascade on update cascade
+);
+
+insert into perfil values (1,'Parceiro Comercial',true,true,true,true);
+insert into perfil values (1,'Contas a Pagar',true,true,true,true);
+insert into perfil values (1,'Contas a Receber',true,true,true,true);
+insert into perfil values (1,'Login',true,true,true,true);
+insert into perfil values (1,'Historico Padrao',true,true,true,true);
+insert into perfil values (1,'Plano de Contas',true,true,true,true);
+insert into perfil values (1,'Lancamento',true,true,true,true);
+
+    CREATE OR REPLACE FUNCTION LEFT(text, integer) RETURNS text AS $$
+        SELECT SUBSTRING($1 FOR $2);
+    $$ LANGUAGE sql IMMUTABLE;
+    GRANT ALL ON FUNCTION LEFT(text, integer) TO public; 

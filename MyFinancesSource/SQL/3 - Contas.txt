@@ -1,0 +1,133 @@
+
+CREATE SEQUENCE SQPlanoContasReduzido MAXVALUE 99999999;
+
+CREATE TABLE PlanoContas(
+   Conta           varchar(12) NOT NULL,
+   CodigoReduzido integer     ,
+   Descricao       varchar     NOT NULL,
+   Tipo            varchar     NOT NULL,
+   PRIMARY KEY (Conta)
+   
+);
+
+CREATE TABLE HistoricoPadrao (
+idHistoricoPadrao serial,
+Descricao varchar,
+Primary key (idHistoricoPadrao)
+);
+
+insert into HistoricoPadrao values (default, 'Venda de Serviço');
+
+CREATE TABLE Lancamento(
+idLancamento      serial,
+idHistoricoPadrao int,
+idContaCredito    varchar(12),
+idContaDebito     varchar(12),
+dataLancamento    date,
+valor             real,
+primary key(idLancamento),
+foreign key (idHistoricoPadrao) references HistoricoPadrao(idHistoricoPadrao) ON DELETE CASCADE,
+foreign key (idContaCredito) references PlanoContas(Conta) ON DELETE CASCADE,
+foreign key (idContaDebito) references PlanoContas(Conta) ON DELETE CASCADE
+);
+
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('1','ATIVO',nextval('SQPlanoContasReduzido'),'ATIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('101','ATIVO CIRCULANTE',nextval('SQPlanoContasReduzido'),'ATIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('10101','DISPONIBILIDADE',nextval('SQPlanoContasReduzido'),'ATIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('1010101','CAIXA GERAL',nextval('SQPlanoContasReduzido'),'ATIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('101010100001','CARTEIRA',nextval('SQPlanoContasReduzido'),'ATIVO');
+
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('1010102','BANCOS CONTA MOVIMENTO',nextval('SQPlanoContasReduzido'),'ATIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('1010103','BANCOS CONTA APLICAÇÃO',nextval('SQPlanoContasReduzido'),'ATIVO');
+
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('10102','DIREITOS REALIZ. A CURTO PRAZO',nextval('SQPlanoContasReduzido'),'ATIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('1010201','CLIENTES',nextval('SQPlanoContasReduzido'),'ATIVO');
+
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('104','ATIVO NAO CIRCULANTE',nextval('SQPlanoContasReduzido'),'ATIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('10401','ATIVO LONGO PRAZO',nextval('SQPlanoContasReduzido'),'ATIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('1040101','CREDITOS A LONGO PRAZO',nextval('SQPlanoContasReduzido'),'ATIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('104010100001','CONTAS DUVIDOSAS A RECEBER',nextval('SQPlanoContasReduzido'),'ATIVO');
+
+          
+
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('2','PASSIVO',nextval('SQPlanoContasReduzido'),'PASSIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('201','PASSIVO CIRCULANTE',nextval('SQPlanoContasReduzido'),'PASSIVO');
+
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('20103','FORNECEDORES',nextval('SQPlanoContasReduzido'),'PASSIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('2010301','FORNECEDORES',nextval('SQPlanoContasReduzido'),'PASSIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('2010302','FUNCIONÁRIOS',nextval('SQPlanoContasReduzido'),'PASSIVO');
+
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('20108','BANCOS CONCILIAÇÃO',nextval('SQPlanoContasReduzido'),'PASSIVO');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('2010801','BANCOS CONCILIAÇÃO',nextval('SQPlanoContasReduzido'),'PASSIVO');
+
+
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('5','DESPESAS',nextval('SQPlanoContasReduzido'),'DESPESA');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('501','DESPESAS PESSOAIS',nextval('SQPlanoContasReduzido'),'DESPESA');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('50101','DESPESAS PESSOAIS',nextval('SQPlanoContasReduzido'),'DESPESA');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('5010101','DESPESAS FIXAS',nextval('SQPlanoContasReduzido'),'DESPESA');
+INSERT INTO PlanoContas(Conta,Descricao,CodigoReduzido,Tipo) VALUES ('5010102','DESPESAS VARIADAS',nextval('SQPlanoContasReduzido'),'DESPESA');
+
+
+
+
+create table ContasPagar (
+idContaPagar serial,
+idParceiro int,
+DataConta date,
+ValorTotal real,
+observacao varchar,
+vencimento date,
+pago boolean,
+dataPagamento date,
+idHistoricoPadrao int,
+contaCredito varchar,
+contaDebito varchar,
+primary key (idContaPagar),
+foreign key (idParceiro) references Parceiro_Comercial (idParceiro) on
+delete cascade on update cascade
+);
+
+create table ContasReceber (
+idContaReceber serial,
+idParceiro int,
+DataConta date,
+ValorTotal real,
+observacao varchar,
+vencimento date,
+recebido boolean,
+dataRecebimento date,
+idHistoricoPadrao int,
+contaCredito varchar,
+contaDebito varchar,
+primary key (idContaReceber),
+foreign key (idParceiro) references Parceiro_Comercial (idParceiro) on
+delete cascade on update cascade
+);
+
+
+CREATE SEQUENCE cliente MAXVALUE 99999;
+CREATE SEQUENCE fornecedor MAXVALUE 99999;
+CREATE SEQUENCE funcionario MAXVALUE 99999;
+
+create table configuracao(
+id serial,
+tipo varchar,
+proximo int, 
+primary key(id)
+);
+
+CREATE TABLE ContaParceiro (
+IdContaParceiro serial,
+idParceiro int,
+Conta varchar,
+TipoDaConta varchar,
+primary key (IdContaParceiro),
+foreign key (IdParceiro) references Parceiro_Comercial (IdParceiro) on
+delete cascade on update cascade,
+foreign key (Conta) references PlanoContas (Conta) on
+delete cascade on update cascade
+);
+
+insert into configuracao values(default,'Cliente',nextval('cliente'));
+insert into configuracao values(default,'Fornecedor',nextval('fornecedor'));
+insert into configuracao values(default,'Funcionario',nextval('funcionario'));
