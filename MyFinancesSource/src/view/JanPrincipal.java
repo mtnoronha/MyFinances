@@ -18,6 +18,7 @@ import com.towel.swing.img.JImagePanel;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import model.Mensagem;
 import model.Sv;
 import relatorio.GerarRelatorio;
 import relatorio.contas.JanRelContas;
@@ -121,6 +122,9 @@ public class JanPrincipal extends javax.swing.JFrame {
         itemCompromissoHJ = new javax.swing.JMenuItem();
         jSeparator9 = new javax.swing.JPopupMenu.Separator();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        itemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
@@ -139,19 +143,19 @@ public class JanPrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setFont(new java.awt.Font("sansserif", 1, 12));
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel2.setText("F1 - Parceiros");
 
-        jLabel5.setFont(new java.awt.Font("sansserif", 1, 12));
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel5.setText("F4 - Contas à Pagar");
 
-        jLabel6.setFont(new java.awt.Font("sansserif", 1, 12));
+        jLabel6.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel6.setText("F5 - Contas à Receber");
 
-        jLabel7.setFont(new java.awt.Font("sansserif", 1, 12));
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel7.setText("F6 - Lembretes de Contas ");
 
-        jLabel9.setFont(new java.awt.Font("sansserif", 1, 12));
+        jLabel9.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel9.setText("F8 - Compromissos de HJ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -188,10 +192,10 @@ public class JanPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Logado como:");
 
-        campoNomeFunc.setFont(new java.awt.Font("sansserif", 1, 12));
+        campoNomeFunc.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         campoNomeFunc.setText("jLabel2");
 
-        campoDiasRestantes.setFont(new java.awt.Font("sansserif", 1, 12));
+        campoDiasRestantes.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         campoDiasRestantes.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -216,8 +220,6 @@ public class JanPrincipal extends javax.swing.JFrame {
                     .addComponent(campoDiasRestantes))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        painelImagem.setBorder(null);
 
         javax.swing.GroupLayout painelImagemLayout = new javax.swing.GroupLayout(painelImagem);
         painelImagem.setLayout(painelImagemLayout);
@@ -414,6 +416,26 @@ public class JanPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mUtili);
 
+        jMenu1.setText("Ajuda");
+
+        jMenuItem3.setText("Ajuda");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        itemSobre.setText("Sobre");
+        itemSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSobreActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemSobre);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -545,6 +567,16 @@ public class JanPrincipal extends javax.swing.JFrame {
         j.setVisible(true);
 }//GEN-LAST:event_itemRelContasActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        Mensagem.mensagemErro(this, "Ainda não foi implementado.");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void itemSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSobreActionPerformed
+        // TODO add your handling code here
+        new About().setVisible(true);
+    }//GEN-LAST:event_itemSobreActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel campoDiasRestantes;
     private javax.swing.JLabel campoNomeFunc;
@@ -559,6 +591,7 @@ public class JanPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemPlanoContas;
     private javax.swing.JMenuItem itemRelContas;
     private javax.swing.JMenuItem itemRelPlanoContas;
+    private javax.swing.JMenuItem itemSobre;
     private javax.swing.JMenuItem itemUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -566,9 +599,11 @@ public class JanPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator10;
